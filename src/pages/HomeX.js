@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Typography, Button, Grid, AppBar, Toolbar } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 
-const Home = () => {
+const HomeX = () => {
     const navigate = useNavigate();
 
     return (
@@ -13,11 +13,9 @@ const Home = () => {
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         LOGO
                     </Typography>
-                    <Button color="inherit" onClick={() => navigate("/login")}>
-                        Login
-                    </Button>
-                    <Button color="inherit" onClick={() => navigate("/register")}>
-                    SIGNUP
+                   
+                    <Button color="inherit" onClick={() => navigate("/profile")}>
+                    Profile
                     </Button>
                 </Toolbar>
             </AppBar>
@@ -26,10 +24,11 @@ const Home = () => {
             {/* Hero Section */}
             <Container maxWidth="md" sx={{ textAlign: "center", mt: 10 }}>
                 <Typography variant="h2" fontWeight="bold">
-                    Welcome to LOGMGTSYS
+                    Welcome {JSON.parse(localStorage.getItem("loggedInUser")).name.name}, LOGMGTSYS
                 </Typography>
                 <Typography variant="h5" color="textSecondary" sx={{ mt: 2 }}>
                     The best place to manage your profile securely.
+                     
                 </Typography>
                 <Button 
                     variant="contained" 
@@ -37,7 +36,7 @@ const Home = () => {
                     sx={{ mt: 3, px: 4, py: 1.5 }} 
                     onClick={() => navigate("/register")}
                 >
-                    Get Started
+                   Upgrade to premium today!
                 </Button>
             </Container>
 
@@ -65,4 +64,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomeX;

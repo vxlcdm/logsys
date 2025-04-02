@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Card,Switch, FormControlLabel, Container,CardContent, CardActions, Avatar, Typography, Button, Grid, Divider, Box  } from "@mui/material";
+import { Card,Switch, FormControlLabel,  AppBar, Toolbar,Container,CardContent, CardActions, Avatar, Typography, Button, Grid, Divider, Box  } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Login from "../components/Login";
-
+import {  Link } from "react-router-dom";
 
 
 const Profile = () => {
 
 
     const Nav= useNavigate();
+    const navigate = useNavigate();
     const [user,setUser]=useState(null);
     const [showDetails, setShowDetails] = useState(false);
     
@@ -58,6 +59,19 @@ const Profile = () => {
 
 
     return (
+        <>
+        <AppBar position="static" sx={{ backgroundColor: "#212121" }}>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        LOGO
+                    </Typography>
+                    
+                    <Button color="inherit" onClick={() => navigate("/")}>
+                    Home
+                    </Button>
+                </Toolbar>
+            </AppBar>
+            
         <Card sx={{ maxWidth: 500, mx: "auto", my: 4, p: 2, boxShadow: 3, borderRadius: 3 }}>
             <CardContent>
                 {/* Avatar & Name */}
@@ -213,6 +227,7 @@ const Profile = () => {
                 <Button variant="contained" onClick={handleLogout}>Logout</Button>
             </CardActions>
         </Card>
+        </>
     );
 };
 

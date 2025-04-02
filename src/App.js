@@ -7,6 +7,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import RouteProtection from './utils/RouteProtection';
 import ProfileTemp from './pages/ProfileTemp';
+import HomeX from './pages/HomeX';
+import HomeProtection from './utils/HomeProtection';
 
  
 
@@ -18,7 +20,13 @@ function App() {
  
 <Router>
 <Routes>
-<Route   path='/' element={<Home/>}     />
+
+ 
+<Route path="/" element={<HomeProtection />} > 
+<Route path="/" element={<HomeX/>}/>
+</Route>
+
+<Route path="/u" element={<Home/>} />
 <Route   path='/register' element={<Register/>}     />
 <Route   path='/login' element={<Login/>}     />
 <Route   path='/ppp' element={<ProfileTemp/>}     />
