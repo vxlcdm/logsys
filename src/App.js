@@ -6,7 +6,7 @@ import Profile from './pages/Profile';
 import Register from './components/Register';
 import Login from './components/Login';
 import RouteProtection from './utils/RouteProtection';
-
+import ProfileTemp from './pages/ProfileTemp';
 
  
 
@@ -21,6 +21,7 @@ function App() {
 <Route   path='/' element={<Home/>}     />
 <Route   path='/register' element={<Register/>}     />
 <Route   path='/login' element={<Login/>}     />
+<Route   path='/ppp' element={<ProfileTemp/>}     />
 
 <Route path='/profile' element={<RouteProtection/>}>
 <Route   path='/profile' element={<Profile/>}     />

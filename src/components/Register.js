@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import { Container, TextField, Button, Typography, Paper } from "@mui/material";
+import { Container, TextField, Button, Typography,CircularProgress, Paper } from "@mui/material";
+import GenderSlider from '../minis/GenderSlider';
  
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { padding, style } from '@mui/system';
-
+import UseCustomFetch from '../customHook/UseCustomFetch';
 
 
 
@@ -21,18 +22,106 @@ const Register = () => {
     const [passAlert, setPassAlert]=useState("")
     const [cpassAlert, setCPassAlert]=useState("");
     const [tapCount,setTapCount]=useState(3);
+    const [selectedGender, setSelectedGender] = useState(0);
+
+    let genderVal=1;
+    const other=()=>{
+        let randomNum=Math.floor(Math.random()*10);
+        genderVal+=randomNum;
+        // console.log("GENDERVAL=", genderVal);
+        
+        return genderVal%2==0?"male":"female";
+    }
+    // console.log(selectedGender);
+    const genderLabels = ["male", "female", other()];
+    console.log(selectedGender);
+    console.log(genderLabels[selectedGender]);
+    
+
 
     
-    const   user={
-        name:name,
-        username: null,
-        email:email,
-        mobile:99,
-        password:password
-    }
+
+    
+   
+    
+    const {data, data2, loading, error}=UseCustomFetch(`https://randomuser.me/api/?gender=${genderLabels[selectedGender]}`);
+
+     if (loading) return <CircularProgress style={{ display: "block", margin: "20px auto" }} />;
+        if (error) return <Typography color="error">Error: {error}</Typography>;
+    
+     const  user = data
+        ? {
+              gender: data.gender || "",
+              name: {
+                  title: data.name?.title || "",
+                  name:name,
+              },
+              location: {
+                  street: {
+                      number: data.location?.street?.number || null,
+                      name: data.location?.street?.name || ""
+                  },
+                  city: data.location?.city || "",
+                  state: data.location?.state || "",
+                  country: data.location?.country || "",
+                  postcode: data.location?.postcode || null,
+                  coordinates: {
+                      latitude: data.location?.coordinates?.latitude || "",
+                      longitude: data.location?.coordinates?.longitude || ""
+                  },
+                  timezone: {
+                      offset: data.location?.timezone?.offset || "",
+                      description: data.location?.timezone?.description || ""
+                  }
+              },
+              email:  email  ,
+              password:  password ,
+              login: {
+                  uuid: data.login?.uuid || "",
+                  username: data.login?.username || "",
+                  password: data.login?.password || "",
+                  salt: data.login?.salt || "",
+                  md5: data.login?.md5 || "",
+                  sha1: data.login?.sha1 || "",
+                  sha256: data.login?.sha256 || ""
+              },
+              dob: {
+                  date: data.dob?.date || "",
+                  age: data.dob?.age || null
+              },
+              registered: {
+                  date: data.registered?.date || ""
+              },
+              cell: data.cell || "",
+              id: {
+                  name: data.id?.name || "",
+                  value: data.id?.value || ""
+              },
+              picture: {
+                  large: data.picture?.large || ""
+              },
+              seed: data2.info.seed || ""  
+          }
+        : null;  
+    
+    console.log(user);
+    
+
+
+    
+    // console.log(user);
+    
+    
+    // console.log(user);
+    
     let flag=false;
     let errorCount=0;
-    
+
+    const handleUsernameEnquiry=()=>{
+
+
+    }
+
     const handleRegister=()=>{
        
         if (!name?.trim()) 
@@ -97,12 +186,13 @@ const Register = () => {
        }
 
       
-    const letsCreateObj=()=>{
+    const letsCreateObj= ()=>{
+
         if(flag){
      
         localStorage.setItem(user.email,JSON.stringify(user));
-        localStorage.setItem(user.username,JSON.stringify(user));
-        localStorage.setItem(user.mobile,JSON.stringify(user));
+        localStorage.setItem(user.login.username,JSON.stringify(user));
+        localStorage.setItem(user.cell,JSON.stringify(user));
         console.log("IDHAR TAK AYA ");
         Nav("/login");
 
@@ -146,6 +236,11 @@ const Register = () => {
              }
         }} />
         
+
+
+        <GenderSlider gender={selectedGender} onChange={setSelectedGender} />
+
+
         
 
         <TextField label="Password" type="password" fullWidth margin="normal" variant="outlined" value={password} onChange={(e) =>{  

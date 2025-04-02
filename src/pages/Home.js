@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, Button, Grid, AppBar, Toolbar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -44,18 +44,18 @@ const Home = () => {
             {/* Features Section */}
             <Container maxWidth="lg" sx={{ mt: 10 }}>
                 <Grid container spacing={4}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid size={4} item xs={12} sm={4}>
                         <Typography variant="h5" fontWeight="bold">🚀 Fast</Typography>
                         <Typography color="textSecondary">Experience seamless navigation and fast processing.</Typography>
                     </Grid>
 
-                    
-                    <Grid item xs={12} sm={4}>
+
+                    <Grid size={4} item xs={12} sm={4}>
                         <Typography variant="h5" fontWeight="bold">🔒 Secure</Typography>
                         <Typography color="textSecondary">Your data is encrypted and securely stored.</Typography>
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid size={4} item xs={12} sm={4}>
                         <Typography variant="h5" fontWeight="bold">🎨 Dashing UI</Typography>
                         <Typography color="textSecondary">Enjoy a modern and clean interface.</Typography>
                     </Grid>
