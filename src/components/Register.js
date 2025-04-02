@@ -22,6 +22,7 @@ const Register = () => {
     const [cpassAlert, setCPassAlert]=useState("");
     const [tapCount,setTapCount]=useState(3);
 
+    
     const   user={
         name:name,
         username: null,
