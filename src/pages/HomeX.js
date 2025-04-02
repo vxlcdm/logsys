@@ -34,7 +34,7 @@ const HomeX = () => {
                     variant="contained" 
                     color="primary" 
                     sx={{ mt: 3, px: 4, py: 1.5 }} 
-                    onClick={() => navigate("/register")}
+                    onClick={() => navigate("/prpg")}
                 >
                    Upgrade to premium today!
                 </Button>

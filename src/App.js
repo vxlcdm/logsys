@@ -9,6 +9,7 @@ import RouteProtection from './utils/RouteProtection';
 import ProfileTemp from './pages/ProfileTemp';
 import HomeX from './pages/HomeX';
 import HomeProtection from './utils/HomeProtection';
+import PurchasePage from './pages/PurchasePage';
 
  
 
@@ -30,7 +31,7 @@ function App() {
 <Route   path='/register' element={<Register/>}     />
 <Route   path='/login' element={<Login/>}     />
 <Route   path='/ppp' element={<ProfileTemp/>}     />
-
+<Route path="/prpg" element={<PurchasePage/>}  />
 <Route path='/profile' element={<RouteProtection/>}>
 <Route   path='/profile' element={<Profile/>}     />
 </Route>
