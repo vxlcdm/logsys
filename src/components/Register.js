@@ -14,10 +14,14 @@ const Register = () => {
     const [name, setName]= useState("");
     const [email,setEmail]=useState("");
     const [password, setPassword]=useState("");
+    const [cpass, setCPass]=useState("");
     const [alert, setAlert]=useState("");
     const [nameAlert, setNameAlert]=useState("")
     const [emailAlert, setEmailAlert]=useState("")
     const [passAlert, setPassAlert]=useState("")
+    const [cpassAlert, setCPassAlert]=useState("");
+    const [tapCount,setTapCount]=useState(3);
+
     const   user={
         name:name,
         username: null,
@@ -27,9 +31,9 @@ const Register = () => {
     }
     let flag=false;
     let errorCount=0;
+    
     const handleRegister=()=>{
-        
-        
+       
         if (!name?.trim()) 
             {
                 setNameAlert("Name cannot be empty");
@@ -46,7 +50,30 @@ const Register = () => {
                     {
                             setPassAlert("Password cannot be empty");
                             errorCount++;
-                    }
+                    }if (!cpass?.trim()) 
+                        {
+                                setCPassAlert("Confirm password cannot be empty");
+                                errorCount++;
+                                return;
+                        }
+                        if (password !== cpass) {
+                            setCPassAlert("Passwords do not match!");
+                            setTapCount((prevTapCount)=>prevTapCount-1);
+                            if(tapCount<3){
+
+                                if( tapCount<1)
+                                    {
+                                            setAlert("Please try again after some hours")
+
+                                        return;
+                                    }
+
+                            setAlert(`Remaining tries left:${tapCount}`)
+                            }
+                            
+                            return;
+                        }
+                           
 
                     const emailFetch=localStorage.getItem(email);if (emailFetch) {  
                         const storedEmail = JSON.parse(emailFetch)?.email;  
@@ -60,7 +87,7 @@ const Register = () => {
 
             
              
-                    if(errorCount==0){
+                    if(errorCount===0){
                     flag=true;
                     letsCreateObj();}
                     else{
@@ -101,6 +128,7 @@ const Register = () => {
         {nameAlert &&  <Alert style={styles.alertStyle} severity="error">{nameAlert}</Alert>}
         {emailAlert && <Alert style={styles.alertStyle} severity="error">{emailAlert}</Alert>}
         {passAlert && <Alert style={styles.alertStyle} severity="error">{passAlert}</Alert>}
+        {cpassAlert && <Alert style={styles.alertStyle} severity="error">{cpassAlert}</Alert>}
 
         <TextField id="outlined-basic" fullWidth margin="normal" value={name} label="Name" variant="outlined" onChange={(e)=>{
             setName(e.target.value);
@@ -127,8 +155,15 @@ const Register = () => {
 
         }} />
 
+        <TextField label="Confirm password" type="password" fullWidth margin="normal" variant="outlined" value={cpass} onChange={(e) =>{  
+         setCPass(e.target.value);
+         if (cpassAlert!== "") { 
+             setCPassAlert(""); 
+         }
 
-        <Button variant="contained" color="primary" fullWidth onClick={handleRegister} style={styles.button}>
+        }} />   
+
+        <Button   disabled={tapCount < 0}  variant="contained" color="primary" fullWidth onClick={handleRegister} style={styles.button}>
           Sign Up
         </Button>
         <Typography variant="body2" style={styles.cb}>
