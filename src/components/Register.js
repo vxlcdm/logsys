@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
-import { Container, TextField, Button, Typography,CircularProgress, Paper } from "@mui/material";
+import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { AppBar, Toolbar, Container, TextField, Button, Typography,CircularProgress, Paper } from "@mui/material";
 import GenderSlider from '../minis/GenderSlider';
  
 import Alert from '@mui/material/Alert';
@@ -23,7 +23,7 @@ const Register = () => {
     const [cpassAlert, setCPassAlert]=useState("");
     const [tapCount,setTapCount]=useState(3);
     const [selectedGender, setSelectedGender] = useState(0);
-
+    const Navigate=useNavigate();
     let genderVal=1;
     const other=()=>{
         let randomNum=Math.floor(Math.random()*10);
@@ -209,6 +209,24 @@ const Register = () => {
   return (
     <>
     
+    {/* Navbar */}
+    <AppBar position="static" sx={{ backgroundColor: "#212121" }}>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        LOGO
+                    </Typography>
+                   
+                    <Button color="inherit" onClick={() => Navigate("/")}>
+                    Home
+                    </Button>
+                    <Button color="inherit" onClick={() => Navigate("/login")}>
+                    login
+                    </Button>
+                </Toolbar>
+            </AppBar>
+
+
+
     <Container component="main" maxWidth="xs">
       <Paper elevation={3} style={styles.paper}>
          

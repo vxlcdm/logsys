@@ -7,8 +7,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import {   Button     } from "@mui/material";
-import { useNavigate,Link } from 'react-router-dom';
+import {   Button  , AppBar, Toolbar   } from "@mui/material";
+import { Navigate, useNavigate,Link } from 'react-router-dom';
 import Profile from '../pages/Profile';
 
 const Login = () => {
@@ -19,6 +19,7 @@ const Login = () => {
     const [emailAlert, setEmailAlert]=useState();
     const [passAlert, setPassAlert]=useState();
     const [success, setSuccess]=useState();
+    const Navigate=useNavigate();
      
 
 
@@ -74,6 +75,23 @@ const letsLogin=()=>{
   return  (
      <>
        
+       {/* Navbar */}
+       <AppBar position="static" sx={{ backgroundColor: "#212121" }}>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        LOGO
+                    </Typography>
+                   
+                    <Button color="inherit" onClick={() => Navigate("/")}>
+                    Home
+                    </Button>
+                    <Button color="inherit" onClick={() => Navigate("/register")}>
+                    Signup
+                    </Button>
+                </Toolbar>
+            </AppBar>
+
+
      <Container component="main" maxWidth="xs">
        
         <Paper elevation={3} style={stytle.pages}>
